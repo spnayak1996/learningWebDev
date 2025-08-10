@@ -18,6 +18,7 @@
     box-sizing: border-box;
   }
 </style>
+
 <html>
 <body>
 
@@ -104,9 +105,28 @@
   </select>
 
   <h3>Attach file</h3>
+  <input type="text" id="fileName" style="width:300px;" readonly>
+  <button type="button" id="browseBtn">Browse</button>
+  <input type="file" id="fileInput" name="myfile" style="display: none;">
 
   <h3>Buttons</h3>
+  <button type="submit">Submit</button>
+  <button type="reset">Reset</button>
 </form>
+
+<script>
+  const fileInput = document.getElementById('fileInput');
+  const fileName = document.getElementById('fileName');
+  const browseBtn = document.getElementById('browseBtn');
+
+  browseBtn.addEventListener('click', () => {
+    fileInput.click();
+  });
+
+  fileInput.addEventListener('change', () => {
+    fileName.value = fileInput.files.length > 0 ? fileInput.files[0].name : '';
+  });
+</script>
 
 </body>
 </html>
