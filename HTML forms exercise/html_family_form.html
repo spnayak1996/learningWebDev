@@ -20,6 +20,13 @@
     width: 100%;
     box-sizing: border-box;
   }
+
+  .section-label {
+    font-weight: bold;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
 </style>
 </head>
 <body>
@@ -32,7 +39,7 @@
 </div>
 
 <form id="mainForm" action="/action_page.php" method="post" enctype="multipart/form-data">
-  <h3 style="text-indent: 25px;">Contact form</h3>
+  <label class="section-label" style="text-indent: 25px;">Contact form</label>
 
   <!-- Keep the aligned two-column layout just for this section -->
   <div class="aligned-form">
@@ -50,20 +57,17 @@
 
     <label for="comments">Comments*:</label><br>
     <textarea id="comments" name="comments" rows="8" style="width: 300px;"></textarea>
-  </div>
+  </div><br>
 
-  <br><br>
-
-  <!-- Rest of the controls (formerly the second form) -->
-  <h3>Text field</h3>
+  <label class="section-label">Text field</label>
   <label for="full_name_demo">Your name:</label>
   <input type="text" id="full_name_demo" name="fname_demo">
 
-  <h3>Password field</h3>
+  <label class="section-label">Password field</label>
   <label for="password">Password:</label>
   <input type="password" id="password" name="password">
 
-  <h3>Radio buttons</h3>
+  <label class="section-label">Radio buttons</label>
   <label>Do you like pizza?</label><br>
 
   <input type="radio" id="yes" name="like_pizza" value="Yes">
@@ -78,15 +82,15 @@
   <input type="radio" id="never_tried" name="like_pizza" value="Never tried">
   <label for="never_tried">Never tried</label><br>
 
-  <h3>Check Box</h3>
+  <label class="section-label">Check Box</label>
   <input type="checkbox" id="like_service" name="like_service" value="like_service">
   <label for="like_service">Check this box if you like our service</label><br>
 
-  <h3>Text area</h3>
+  <label class="section-label">Text area</label>
   <label for="like_to_say">Anything you would like to say?</label><br>
   <textarea id="like_to_say" name="comments_extra" rows="7" cols="60"></textarea>
 
-  <h3>I like</h3>
+  <label class="section-label">I like</label>
   <select id="like_list" name="like" size="5">
     <option value="mushroom">mushroom</option>
     <option value="green peppers">green peppers</option>
@@ -95,7 +99,7 @@
     <option value="olives">olives</option>
   </select>
 
-  <h3>Menu</h3>
+  <label class="section-label">Menu</label>
   <label for="fav_color">Your favorite color:</label><br>
   <select id="fav_color" name="fav_color">
     <option value="red">red</option>
@@ -110,12 +114,12 @@
     <option value="gray">gray</option>
   </select>
 
-  <h3>Attach file</h3>
+  <label class="section-label">Attach file</label>
   <input type="text" id="fileName" style="width:300px;" placeholder="No file chosen" readonly>
   <button type="button" id="browseBtn">Browse</button>
   <input type="file" id="fileInput" name="myfile" style="display: none;">
 
-  <h3>Buttons</h3>
+  <label class="section-label">Buttons</label>
   <button type="submit">Submit</button>
   <button type="reset">Reset</button>
 </form>
