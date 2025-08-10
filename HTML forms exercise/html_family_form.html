@@ -40,8 +40,10 @@
 
 <form id="mainForm" action="/action_page.php" method="post" enctype="multipart/form-data">
   <label class="section-label" style="text-indent: 25px;">Contact form</label>
+  <iframe height="2" width="2"></iframe>
+  <iframe height="2" width="85" style="border:none;"></iframe>
+  <iframe height="2" width="2"></iframe>
 
-  <!-- Keep the aligned two-column layout just for this section -->
   <div class="aligned-form">
     <label for="full_name">Your name*:</label>
     <input type="text" id="full_name" name="fname">
@@ -137,7 +139,6 @@
     if (!fileInput.files.length) fileName.placeholder = 'No file chosen';
   });
 
-  // Ensure Reset clears the faux filename as well
   form.addEventListener('reset', () => {
     setTimeout(() => {
       fileName.value = '';
