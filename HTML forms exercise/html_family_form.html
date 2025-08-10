@@ -143,6 +143,8 @@
     setTimeout(() => {
       fileName.value = '';
       fileName.placeholder = 'No file chosen';
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 0);
   });
 </script>
