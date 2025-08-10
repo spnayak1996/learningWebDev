@@ -18,19 +18,19 @@
 
   <div class="aligned-form">
     <label for="full_name">Your name*:</label>
-    <input type="text" id="full_name" name="fname">
+    <input type="name" id="full_name" name="fname" required>
 
     <label for="email">E-mail*:</label>
-    <input type="text" id="email" name="email">
+    <input type="email" id="email" name="email" required title="Please enter a valid email address">
 
     <label for="phone_number">Phone number:</label>
     <input type="text" id="phone_number" name="phone_number">
 
     <label for="website">Website*:</label>
-    <input type="text" id="website" name="website" value="http://" style="width:300px;">
+    <input type="website" id="website" name="website" value="http://" style="width:300px;" required>
 
     <label for="comments">Comments*:</label><br>
-    <textarea id="comments" name="comments" rows="8" style="width: 300px;"></textarea>
+    <textarea id="comments" name="comments" rows="8" style="width: 300px;" required></textarea>
   </div><br>
 
   <label class="section-label">Text field</label>
