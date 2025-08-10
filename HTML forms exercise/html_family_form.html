@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html>
+<head>
 <style>
   .aligned-form {
     display: grid;
@@ -11,54 +13,58 @@
     text-align: left;
   }
 
-  .aligned-form input {
+  .aligned-form input,
+  .aligned-form textarea {
     text-align: left;
     padding: 5px;
     width: 100%;
     box-sizing: border-box;
   }
 </style>
-
-<html>
+</head>
 <body>
 
 <h1 style="text-align: center;">HTML Form Exercise</h1>
 
 <div>
   <span style="color: red;">Please note: </span>
-  <span>This example demonstrates how HTML forms can be used. Submit button should submit and reset button should reset the form(revert the changes in the form fields). The form layout should same as below.</span>
+  <span>This example demonstrates how HTML forms can be used. Submit button should submit and reset button should reset the form (revert the changes in the form fields). The form layout should same as below.</span>
 </div>
 
-<h3 style="text-indent: 25px;">Contact form</h3>
-<form action="/action_page.php" class="aligned-form">
-  <label for="full_name">Your name*:</label>
-  <input type="text" id="full_name" name="fname">
+<form id="mainForm" action="/action_page.php" method="post" enctype="multipart/form-data">
+  <h3 style="text-indent: 25px;">Contact form</h3>
 
-  <label for="email">E-mail*:</label>
-  <input type="text" id="email" name="email">
+  <!-- Keep the aligned two-column layout just for this section -->
+  <div class="aligned-form">
+    <label for="full_name">Your name*:</label>
+    <input type="text" id="full_name" name="fname">
 
-  <label for="phone_number">Phone number:</label>
-  <input type="text" id="phone_number" name="phone_number">
+    <label for="email">E-mail*:</label>
+    <input type="text" id="email" name="email">
 
-  <label for="website">Website*:</label>
-  <input type="text" id="website" name="website" value="http://" style="width:300px;">
+    <label for="phone_number">Phone number:</label>
+    <input type="text" id="phone_number" name="phone_number">
 
-  <label for="comments">Comments*:</label><br>
-  <textarea name="comments" rows="8" style="width: 300px;"></textarea>
-</form>
-<br><br>
+    <label for="website">Website*:</label>
+    <input type="text" id="website" name="website" value="http://" style="width:300px;">
 
-<form>
+    <label for="comments">Comments*:</label><br>
+    <textarea id="comments" name="comments" rows="8" style="width: 300px;"></textarea>
+  </div>
+
+  <br><br>
+
+  <!-- Rest of the controls (formerly the second form) -->
   <h3>Text field</h3>
-  <label for="full_name">Your name:</label>
-  <input type="text" id="full_name" name="fname">
+  <label for="full_name_demo">Your name:</label>
+  <input type="text" id="full_name_demo" name="fname_demo">
 
   <h3>Password field</h3>
   <label for="password">Password:</label>
   <input type="password" id="password" name="password">
 
   <h3>Radio buttons</h3>
-  <label for="password">Do you like pizza?</label><br>
+  <label>Do you like pizza?</label><br>
 
   <input type="radio" id="yes" name="like_pizza" value="Yes">
   <label for="yes">Yes</label><br>
@@ -73,15 +79,15 @@
   <label for="never_tried">Never tried</label><br>
 
   <h3>Check Box</h3>
-  <input type="checkbox" id="checkbox" name="like_service" value="like_service">
+  <input type="checkbox" id="like_service" name="like_service" value="like_service">
   <label for="like_service">Check this box if you like our service</label><br>
 
   <h3>Text area</h3>
   <label for="like_to_say">Anything you would like to say?</label><br>
-  <textarea name="comments" rows="7" cols="60"></textarea>
+  <textarea id="like_to_say" name="comments_extra" rows="7" cols="60"></textarea>
 
   <h3>I like</h3>
-  <select id="like" name="like" size="5">
+  <select id="like_list" name="like" size="5">
     <option value="mushroom">mushroom</option>
     <option value="green peppers">green peppers</option>
     <option value="onions">onions</option>
@@ -91,7 +97,7 @@
 
   <h3>Menu</h3>
   <label for="fav_color">Your favorite color:</label><br>
-  <select id="like" name="like">
+  <select id="fav_color" name="fav_color">
     <option value="red">red</option>
     <option value="blue">blue</option>
     <option value="green">green</option>
@@ -105,7 +111,7 @@
   </select>
 
   <h3>Attach file</h3>
-  <input type="text" id="fileName" style="width:300px;" readonly>
+  <input type="text" id="fileName" style="width:300px;" placeholder="No file chosen" readonly>
   <button type="button" id="browseBtn">Browse</button>
   <input type="file" id="fileInput" name="myfile" style="display: none;">
 
@@ -115,33 +121,26 @@
 </form>
 
 <script>
+  const form = document.getElementById('mainForm');
   const fileInput = document.getElementById('fileInput');
   const fileName = document.getElementById('fileName');
   const browseBtn = document.getElementById('browseBtn');
 
-  browseBtn.addEventListener('click', () => {
-    fileInput.click();
-  });
+  browseBtn.addEventListener('click', () => fileInput.click());
 
   fileInput.addEventListener('change', () => {
     fileName.value = fileInput.files.length > 0 ? fileInput.files[0].name : '';
+    if (!fileInput.files.length) fileName.placeholder = 'No file chosen';
+  });
+
+  // Ensure Reset clears the faux filename as well
+  form.addEventListener('reset', () => {
+    setTimeout(() => {
+      fileName.value = '';
+      fileName.placeholder = 'No file chosen';
+    }, 0);
   });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
