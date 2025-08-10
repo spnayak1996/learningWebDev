@@ -27,7 +27,7 @@
     <input type="text" id="phone_number" name="phone_number">
 
     <label for="website">Website*:</label>
-    <input type="website" id="website" name="website" value="http://" style="width:300px;" required>
+    <input type="text" id="website" name="website" value="http://" style="width:300px;" required pattern="https?://.+" title="Please enter a valid website address starting with http:// or https://">
 
     <label for="comments">Comments*:</label><br>
     <textarea id="comments" name="comments" rows="8" style="width: 300px;" required></textarea>
