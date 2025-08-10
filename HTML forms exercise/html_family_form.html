@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<style>
+  .aligned-form {
+    display: grid;
+    grid-template-columns: 120px 200px; /* column widths */
+    gap: 5px 0px; /* row gap, column gap */
+    align-items: center;
+  }
+
+  .aligned-form label {
+    text-align: left;
+  }
+
+  .aligned-form input {
+    text-align: left;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+</style>
+<html>
+<body>
+
+<h1 style="text-align: center;">HTML Form Exercise</h1>
+
+<div>
+  <span style="color: red;">Please note: </span>
+  <span>This example demonstrates how HTML forms can be used. Submit button should submit and reset button should reset the form(revert the changes in the form fields). The form layout should same as below.</span>
+</div>
+
+<h3 style="text-indent: 25px;">Contact form</h3>
+<form action="/action_page.php" class="aligned-form">
+  <label for="full_name">Your name*:</label>
+  <input type="text" id="full_name" name="fname">
+
+  <label for="email">E-mail*:</label>
+  <input type="text" id="email" name="email">
+
+  <label for="phone_number">Phone number:</label>
+  <input type="text" id="phone_number" name="phone_number">
+
+  <label for="website">Website*:</label>
+  <input type="text" id="website" name="website" value="http://" style="width:300px;">
+
+  <label for="comments">Comments*:</label><br>
+  <textarea name="comments" rows="8" style="width: 300px;"></textarea>
+</form>
+<br><br>
+
+<form>
+  <h3>Text field</h3>
+  <label for="full_name">Your name:</label>
+  <input type="text" id="full_name" name="fname">
+</form>
+
+</body>
+</html>
