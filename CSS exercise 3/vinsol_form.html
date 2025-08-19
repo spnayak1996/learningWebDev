@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vinsol Form</title>
+  <link rel="stylesheet" href="vinsol.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">vins<span>ol</span><small> Empowering Solutions</small></div>
+    <div class="contact">
+      <span>Email us at: <a href="mailto:sales@vinsol.com">sales@vinsol.com</a></span>
+      <span>Skype: <a href="#">Vinsol</a></span>
+    </div>
+  </header>
+
+  <div class="red-rule"></div>
+
+  <main class="wrap">
+    <p class="lead">Please fill the form below</p>
+
+    <section class="form-card">
+      <form class="form-grid" action="#" method="post">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" />
+
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" />
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" />
+
+        <label>Gender</label>
+        <div class="inline">
+          <label class="radio"><input type="radio" name="gender" value="male" checked/> Male</label>
+          <label class="radio"><input type="radio" name="gender" value="female"/> Female</label>
+        </div>
+
+        <label>Date of Birth</label>
+        <div class="dob">
+          <select id="dob-dd" name="dob_dd">
+            <option value="" disabled selected hidden>DD</option>
+            <option>01</option>
+            <option>02</option>
+            <option>03</option>
+            <option>04</option>
+            <option>05</option>
+            <option>06</option>
+            <option>07</option>
+            <option>08</option>
+            <option>09</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+            <option>13</option>
+            <option>14</option>
+            <option>15</option>
+            <option>16</option>
+            <option>17</option>
+            <option>18</option>
+            <option>19</option>
+            <option>20</option>
+            <option>21</option>
+            <option>22</option>
+            <option>23</option>
+            <option>24</option>
+            <option>25</option>
+            <option>26</option>
+            <option>27</option>
+            <option>28</option>
+            <option>29</option>
+            <option>30</option>
+            <option>31</option>
+          </select>
+          <select id="dob-mm" name="dob_mm">
+            <option value="" disabled selected hidden>MM</option>
+            <option>01</option>
+            <option>02</option>
+            <option>03</option>
+            <option>04</option>
+            <option>05</option>
+            <option>06</option>
+            <option>07</option>
+            <option>08</option>
+            <option>09</option>
+            <option>10</option>
+            <option>11</option>
+            <option>12</option>
+          </select>
+          <select id="dob-yy" name="dob_yy">
+            <option value="" disabled selected hidden>YYYY</option>
+            <option>1980</option>
+            <option>1981</option>
+            <option>1982</option>
+            <option>1983</option>
+            <option>1984</option>
+            <option>1985</option>
+            <option>1986</option>
+            <option>1987</option>
+            <option>1988</option>
+            <option>1989</option>
+            <option>1990</option>
+            <option>1991</option>
+            <option>1992</option>
+            <option>1993</option>
+            <option>1994</option>
+            <option>1995</option>
+            <option>1996</option>
+            <option>1997</option>
+            <option>1998</option>
+            <option>1999</option>
+            <option>2000</option>
+            <option>2001</option>
+            <option>2002</option>
+            <option>2003</option>
+            <option>2004</option>
+            <option>2005</option>
+            <option>2006</option>
+            <option>2007</option>
+            <option>2008</option>
+            <option>2009</option>
+            <option>2010</option>
+            <option>2011</option>
+            <option>2012</option>
+            <option>2013</option>
+            <option>2014</option>
+            <option>2015</option>
+            <option>2016</option>
+            <option>2017</option>
+            <option>2018</option>
+            <option>2019</option>
+            <option>2020</option>
+            <option>2021</option>
+            <option>2022</option>
+            <option>2023</option>
+            <option>2024</option>
+          </select>
+        </div>
+
+        <label for="address">Address</label>
+        <textarea id="address" name="address"></textarea>
+
+        <div class="actions">
+          <button type="submit" class="btn">Submit Details</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="notes">
+      <h3>Please note the points:</h3>
+      <ol>
+        <li>Red border (color <code>#db2927</code>, size <code>2px</code>).</li>
+        <li>Top text (font 'tahoma', font size '13px', font color <strong>black</strong> <em>FOR BLUE color</em> <code>#045198</code>).</li>
+        <li>Heading (font 'tahoma', font size '18px', font color <code>#2c286d</code>).</li>
+        <li>Form box (background color <code>#eeeeec</code>, border color <code>#cbcbcb</code>, top &amp; bottom padding <code>20px</code>, padding-left <code>30px</code>, padding between labels and inputs <code>20px</code>).</li>
+        <li>Labels (font 'tahoma', font size '14px', font color 'black').</li>
+        <li>Inputs (background color 'white', border color <code>#b9b9b9</code>, width <code>360px</code>, height <code>25px</code>).</li>
+        <li>Form text (font 'tahoma', font size '13px', font color <code>#6f6f6f</code>).</li>
+        <li>Select box (width <code>110px</code>, font 'tahoma', font size '13px', font color <code>#6f6f6f</code>).</li>
+        <li>Textarea (background 'white', border color <code>#b9b9b9</code>, width <code>360px</code>, height <code>135px</code>).</li>
+        <li>Submit button (background <code>#dc2927</code>, border color <code>#a10200</code>, width <code>130px</code>, height <code>32px</code>, text align 'center', font 'tahoma', font size '14px', color 'white').</li>
+      </ol>
+      <p class="note">Note: All width and heights are including borders, paddings and margins.</p>
+    </section>
+  </main>
+</body>
+</html>
