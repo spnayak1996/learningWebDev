@@ -1,0 +1,130 @@
+/* Base */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  color: #111;
+  background: #fff;
+}
+
+/* Header band */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.brand img {
+  height: 50px;       /* adjust to match design */
+  width: auto;
+  display: block;
+}
+.contact {
+  font-size: 13px;
+  color: #000;
+  display: flex;
+  gap: 20px;
+}
+.contact a { color: #045198; text-decoration: none; }
+
+/* Red rule under header */
+.red-rule { height: 2px; background: #db2927; }
+
+/* Wrapper */
+.wrap {
+  width: 760px;
+  margin: 24px auto;
+}
+
+/* Lead text */
+.lead {
+  font-size: 13px;
+  color: #045198; /* blue variant per note */
+  margin: 0 0 10px;
+  padding-left: 6px;
+  font-weight: 700;
+}
+
+/* Form card */
+.form-card {
+  background: #eeeeec;
+  border: 1px solid #cbcbcb;
+  padding: 20px 30px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  column-gap: 20px;
+  row-gap: 14px;
+  align-items: center;
+}
+
+.form-grid label {
+  font-size: 14px;
+  color: #000;
+}
+
+.form-grid input[type="text"],
+.form-grid input[type="email"],
+.form-grid input[type="password"] {
+  width: 360px;
+  height: 25px;
+  border: 1px solid #b9b9b9;
+  background: #fff;
+  padding: 4px 8px;
+  font-size: 13px;
+  color: #6f6f6f;
+}
+
+.form-grid textarea {
+  width: 360px;
+  height: 135px;
+  border: 1px solid #b9b9b9;
+  background: #fff;
+  padding: 8px;
+  font-size: 13px;
+  color: #6f6f6f;
+  resize: vertical;
+}
+
+.inline { display: flex; gap: 16px; align-items: center; }
+.radio { font-size: 13px; color: #6f6f6f; }
+.radio input { margin-right: 6px; }
+
+.dob { display: flex; gap: 10px; }
+.dob select {
+  width: 110px;
+  height: 25px;
+  border: 1px solid #b9b9b9;
+  background: #fff;
+  font-size: 13px;
+  color: #6f6f6f;
+  padding: 2px 6px;
+}
+
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.btn {
+  width: 130px;
+  height: 32px;
+  background: #dc2927;
+  border: 1px solid #a10200;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(0.95); }
+
+/* Notes list */
+.notes { margin: 24px auto; width: 760px; }
+.notes h3 { color: #db2927; margin: 0 0 12px; }
+.notes ol { margin: 0 0 8px 18px; }
+.notes li { margin-bottom: 6px; font-size: 13px; color: #333; }
+.notes .note { color: #c00; font-size: 12px; }
