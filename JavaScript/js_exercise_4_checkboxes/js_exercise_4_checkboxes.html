@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Select up to 3 days</title>
+<style>
+  body { font-family: Helvetica; padding: 24px; }
+  fieldset { max-width: 175px; border: 1px solid #ddd; border-radius: 8px; }
+  legend { font-weight: 700; padding: 0 .4rem; }
+  .days { display: grid; grid-template-columns: repeat(1, minmax(150px, 1fr)); gap: 10px 18px; padding: 16px; }
+  label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+  .hint { color: #666; margin-top: 10px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<fieldset>
+  <legend>Pick up to 3 days</legend>
+  <div class="days" id="days">
+    <!-- Order kept as you listed -->
+    <label><input type="checkbox" data-day="Sunday">Sunday</label>
+    <label><input type="checkbox" data-day="Monday">Monday</label>
+    <label><input type="checkbox" data-day="Tuesday">Tuesday</label>
+    <label><input type="checkbox" data-day="Wednesday">Wednesday</label>
+    <label><input type="checkbox" data-day="Thursday">Thursday</label>
+    <label><input type="checkbox" data-day="Friday">Friday</label>
+    <label><input type="checkbox" data-day="Saturday">Saturday</label>
+    <label><input type="checkbox" id="none" data-none>None</label>
+  </div>
+</fieldset>
+
+<script>
+(function() {
+  const container = document.getElementById('days');
+  const noneBox = document.getElementById('none');
+
+  const selectedOrder = [];
+
+  const dayBoxes = () => Array.from(container.querySelectorAll('input[type="checkbox"][data-day]'));
+
+  function formatDayList(list) {
+    if (list.length === 1) return list[0];
+    if (list.length === 2) return `${list[0]} and ${list[1]}`;
+    return `${list.slice(0, -1).join(', ')} and ${list[list.length - 1]}`;
+  }
+
+  function syncSelectedOrder() {
+    const checkedNames = new Set(dayBoxes().filter(b => b.checked).map(b => b.dataset.day));
+    for (let i = selectedOrder.length - 1; i >= 0; i--) {
+      if (!checkedNames.has(selectedOrder[i])) selectedOrder.splice(i, 1);
+    }
+    dayBoxes().forEach(b => {
+      if (b.checked && !selectedOrder.includes(b.dataset.day)) {
+        selectedOrder.push(b.dataset.day);
+      }
+    });
+  }
+
+  //on selecting a day
+  function onDayToggle(box) {
+    if (noneBox.checked) {
+      noneBox.checked = false;
+    }
+
+    syncSelectedOrder();
+
+    const checked = dayBoxes().filter(b => b.checked);
+    if (checked.length > 3) {
+      box.checked = false;
+
+      syncSelectedOrder();
+
+      const msg = `Only 3 days can be selected. You have already selected ${formatDayList(selectedOrder)}.`;
+      alert(msg);
+    }
+  }
+
+  // on selecting none
+  function onNoneToggle() {
+    if (noneBox.checked) {
+      dayBoxes().forEach(b => b.checked = false);
+      selectedOrder.length = 0;
+    }
+  }
+
+  container.addEventListener('change', (e) => {
+    const target = e.target;
+    if (!(target instanceof HTMLInputElement)) return;
+
+    if (target.hasAttribute('data-none')) {
+      onNoneToggle();
+    } else if (target.hasAttribute('data-day')) {
+      onDayToggle(target);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
