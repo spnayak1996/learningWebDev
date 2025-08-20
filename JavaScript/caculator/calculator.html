@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basic Calculator</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #222;
+        font-family: sans-serif;
+      }
+      .calculator {
+        background: #333;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+      }
+      .display {
+        background: #111;
+        color: #0f0;
+        font-size: 28px;
+        text-align: right;
+        padding: 12px;
+        border-radius: 6px;
+        margin-bottom: 16px;
+        min-width: 220px;
+        overflow-x: auto;
+      }
+      .keys {
+        display: grid;
+        grid-template-columns: repeat(4, 60px);
+        gap: 10px;
+      }
+      button {
+        font-size: 18px;
+        padding: 14px;
+        border: none;
+        border-radius: 6px;
+        background: #555;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.1s, background 0.1s;
+      }
+      button:active {
+        transform: scale(0.92);
+        background: #777;
+      }
+      button.op { background: #0a84ff; }
+      button.eq { background: #34c759; grid-column: span 2; }
+      button.clear { background: #ff3b30; grid-column: span 2; }
+    </style>
+  </head>
+
+  <body>
+    <div class="calculator">
+      <div class="display" id="display">0</div>
+      <div class="keys">
+        <button data-num="7">7</button>
+        <button data-num="8">8</button>
+        <button data-num="9">9</button>
+        <button class="op" data-op="/">÷</button>
+
+        <button data-num="4">4</button>
+        <button data-num="5">5</button>
+        <button data-num="6">6</button>
+        <button class="op" data-op="*">×</button>
+
+        <button data-num="1">1</button>
+        <button data-num="2">2</button>
+        <button data-num="3">3</button>
+        <button class="op" data-op="-">−</button>
+
+        <button data-num=""></button>
+        <button data-num="0">0</button>
+        <button data-num=""></button>
+        <button class="op" data-op="+">+</button>
+
+        <button class="clear" data-clear="all">AC</button>
+        <button class="eq" data-eq="=">=</button>
+      </div>
+    </div>
+
+    <script>
+      const display = document.getElementById('display');
+      let current = '0';
+      let operator = null;
+      let firstValue = null;
+      let resetNext = false;
+
+      function updateDisplay() {
+        display.textContent = current;
+      }
+
+      function digitCount(str) {
+        return (str.match(/\d/g) || []).length;
+      }
+
+      function inputDigit(d) {
+        if (resetNext) {
+          current = '0';
+          resetNext = false;
+        }
+
+        if (digitCount(current) >= 6 && current !== '0') return;
+
+        if (current === '0') {
+          current = d || '0';
+        } else {
+          current += d;
+        }
+        updateDisplay();
+      }
+
+      function setOperator(op) {
+        if (firstValue === null) {
+          firstValue = parseFloat(current);
+        } else if (operator) {
+          if (!resetNext) {
+            firstValue = operate(operator, firstValue, parseFloat(current));
+            current = formatResult(firstValue);
+            updateDisplay();
+          }
+        }
+        operator = op;
+        resetNext = true;
+      }
+
+      function operate(op, a, b) {
+        switch(op) {
+          case '+': return a + b;
+          case '-': return a - b;
+          case '*': return a * b;
+          case '/': return b !== 0 ? a / b : 'Error';
+        }
+      }
+
+      function formatResult(num) {
+        if (num === 'Error') return 'Error';
+        const str = String(num);
+        if (digitCount(str) > 15) {
+          return Number(num).toExponential(8);
+        }
+        return str;
+      }
+
+      function calculate() {
+        if (operator && !resetNext) {
+          const result = operate(operator, firstValue, parseFloat(current));
+          current = formatResult(result);
+          firstValue = null;
+          operator = null;
+          resetNext = true;
+          updateDisplay();
+        }
+      }
+
+      function clearAll() {
+        current = '0';
+        firstValue = null;
+        operator = null;
+        resetNext = false;
+        updateDisplay();
+      }
+
+      document.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.dataset.num !== undefined && btn.dataset.num !== '') {
+            inputDigit(btn.dataset.num);
+          } else if (btn.dataset.op) {
+            setOperator(btn.dataset.op);
+          } else if (btn.dataset.eq) {
+            calculate();
+          } else if (btn.dataset.clear) {
+            clearAll();
+          }
+        });
+      });
+
+      updateDisplay();
+    </script>
+  </body>
+</html>
