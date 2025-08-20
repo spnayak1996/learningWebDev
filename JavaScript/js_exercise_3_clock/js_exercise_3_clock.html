@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clocks — Digital & Analog</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --panel: #151a22;
+    --ink: #e8eef7;
+    --muted: #a6b0c2;
+    --accent: #2f8bfd;
+    --accent-2: #22c55e;
+    --border: #223049;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background: radial-gradient(1000px 600px at 15% -10%, #1a2232 0, var(--bg) 60%);
+    color: var(--ink);
+    font-family: Helvetica;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+  }
+  .app {
+    width: min(820px, 95vw);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+  header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 18px;
+    letter-spacing: .3px;
+  }
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding: 18px;
+  }
+  button {
+    appearance: none;
+    border: 1px solid var(--border);
+    background: #0f1520;
+    color: var(--ink);
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform .04s ease, filter .12s ease, background .12s ease;
+  }
+  button.btn-digital { background: var(--accent); border-color: rgba(255,255,255,.1); }
+  button.btn-analog { background: var(--accent-2); border-color: rgba(255,255,255,.1); }
+  button:active { transform: translateY(1px) scale(.99); }
+  footer {
+    padding: 14px 20px 18px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+  }
+  @media (max-width: 720px) {
+    main { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Clocks — Digital & Analog</h1>
+    </header>
+
+    <main>
+      <!-- Digital -->
+      <button id="btn-digital" class="btn-digital">Show Digital Time</button>
+
+      <!-- Analog -->
+      <button id="btn-analog" class="btn-analog">Show Analog Time</button>
+    </main>
+
+    <footer>Click a button to get an alert with the time in the specified format.</footer>
+  </div>
+
+<script>
+// ===== Abstract Base Class =====
+class Clock {
+  constructor(label) {
+    if (new.target === Clock) {
+      throw new Error("Clock is abstract and cannot be instantiated directly.");
+    }
+    this.label = label;
+  }
+  getTime() {
+    throw new Error("getTime() must be implemented by subclass.");
+  }
+  //helper to format with zero-padding
+  static pad(n) { return String(n).padStart(2, "0"); }
+}
+
+// ===== Digital Clock =====
+class DigitalClock extends Clock {
+
+  constructor() { super("Show Digital Time"); }
+
+  getTime() {
+    const now = new Date();
+    let h = now.getHours();
+    const m = now.getMinutes();
+    const s = now.getSeconds();
+    const ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12; // 0 -> 12
+    return `${Clock.pad(h)}:${Clock.pad(m)}:${Clock.pad(s)} ${ampm}`;
+  }
+}
+
+// ===== Analog Clock =====
+class AnalogClock extends Clock {
+
+  constructor() { super("Show Analog Time"); }
+
+  getTime() {
+    const now = new Date();
+    const h24 = now.getHours();
+    const m = now.getMinutes();
+    const s = now.getSeconds();
+    const h = h24 % 12;
+
+    const hourDeg   = (h * 30);
+    const minuteDeg = (m * 6);
+    const secondDeg = (s * 6); 
+    return `Hour Hand at ${hourDeg}deg\nMinute Hand at ${minuteDeg}deg\nSecond Hand at ${secondDeg}deg`;
+  }
+}
+
+// ===== Instantiate clocks =====
+const digital = new DigitalClock();
+const analog  = new AnalogClock();
+
+// ===== Wire buttons (alerts) =====
+document.getElementById("btn-digital").addEventListener("click", () => {
+  alert(digital.getTime());
+});
+document.getElementById("btn-analog").addEventListener("click", () => {
+  alert(analog.getTime());
+});
+
+</script>
+</body>
+</html>
