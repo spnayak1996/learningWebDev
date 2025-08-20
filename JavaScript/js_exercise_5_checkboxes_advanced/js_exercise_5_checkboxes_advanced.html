@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Expandable Checkboxes</title>
+<style>
+  body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; padding: 20px; }
+  .panel {
+    height: 100px;               
+    width: 200px;
+    overflow: auto;              
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: #fafafa;
+  }
+  .group {
+    margin-bottom: 10px;
+  }
+  .group > label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .children {
+    margin: 8px 0 0 26px;        
+    display: none;               
+  }
+  .children label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+    cursor: pointer;
+    font-weight: 400;
+  }
+</style>
+</head>
+<body>
+
+<h3>Pick categories</h3>
+
+<div class="panel" id="panel">
+  <!-- Color -->
+  <div class="group" data-group="color">
+    <label>
+      <input type="checkbox" class="parent" />
+      Color
+    </label>
+    <div class="children" role="group" aria-label="Color options">
+      <label><input type="checkbox" value="red" />Red</label>
+      <label><input type="checkbox" value="yellow" />Yellow</label>
+      <label><input type="checkbox" value="green" />Green</label>
+      <label><input type="checkbox" value="blue" />Blue</label>
+    </div>
+  </div>
+
+  <!-- Drinks -->
+  <div class="group" data-group="drinks">
+    <label>
+      <input type="checkbox" class="parent" />
+      Drinks
+    </label>
+    <div class="children" role="group" aria-label="Drink options">
+      <label><input type="checkbox" value="coke" />coke</label>
+      <label><input type="checkbox" value="pepsi" />pepsi</label>
+      <label><input type="checkbox" value="dew" />dew</label>
+    </div>
+  </div>
+
+  <!-- Movies -->
+  <div class="group" data-group="movies">
+    <label>
+      <input type="checkbox" class="parent" />
+      Movies
+    </label>
+    <div class="children" role="group" aria-label="Movie options">
+      <label><input type="checkbox" value="Dar" />Dar</label>
+      <label><input type="checkbox" value="Sir" />Sir</label>
+    </div>
+  </div>
+
+  <!-- Bikes -->
+  <div class="group" data-group="bikes">
+    <label>
+      <input type="checkbox" class="parent" />
+      Bikes
+    </label>
+    <div class="children" role="group" aria-label="Bike options">
+      <label><input type="checkbox" value="V-rod" />V-rod</label>
+      <label><input type="checkbox" value="pulsar" />pulsar</label>
+      <label><input type="checkbox" value="cbz" />cbz</label>
+    </div>
+  </div>
+</div>
+
+<script>
+  const panel = document.getElementById('panel');
+
+  // Event delegation for all parent checkboxes
+  panel.addEventListener('change', (e) => {
+    const parentCb = e.target.closest('.parent');
+    if (!parentCb) return;
+
+    const group = parentCb.closest('.group');
+    const kids = group.querySelector('.children');
+    const kidCheckboxes = kids.querySelectorAll('input[type="checkbox"]');
+
+    if (parentCb.checked) {
+      // Show child list
+      kids.style.display = 'block';
+      // Auto-scroll panel so the children
+      kids.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      // Hide and clear all children
+      kidCheckboxes.forEach(cb => { cb.checked = false; });
+      kids.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
